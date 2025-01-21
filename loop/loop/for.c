@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main()
+int main_t1()
 {
 		 // 반복에 사용할 변수 i를 선언하고 0으로 초기화 
 	for (int i = 0; i < 100; i++)	// 한번 반복할때 마다 i를 1씩 증가시킴 
