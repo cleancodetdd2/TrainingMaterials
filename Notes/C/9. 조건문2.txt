@@ -29,7 +29,11 @@
 
     6) switch에서 판별할 수 있는 자료형 
         - 정수 자료형, 문자 자료형(char) 사용 가능
-        - 실수 자료형 (float, double)은 사용 불가                     
+        - 실수 자료형 (float, double)은 사용 불가 
+
+    7) case에서 break를 사용하지 않는 경우 
+        - case를 break로 중단하지 않으면 그 다음에 있는 case, default가 
+          계속 실행됨                             
 
 2. 조건문 비교 
 
