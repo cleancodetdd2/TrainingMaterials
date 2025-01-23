@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int main()
+int main_t1()
 {
 	int num;
 	int result;
