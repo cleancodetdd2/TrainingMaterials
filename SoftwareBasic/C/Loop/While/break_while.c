@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main()
+int main_t8()
 {
 	int num = 0;
 
