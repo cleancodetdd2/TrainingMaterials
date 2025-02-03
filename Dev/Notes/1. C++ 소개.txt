@@ -1,0 +1,59 @@
+1. C++
+    1) 비야네 스트롭스트롭이 1979년 착수한 C with Classes 연구 
+    2) 1985년 The C++ Programming Language 출판 
+    3) 1998년 C++ 국제 표준 언어 규정 제정 => C++98 부름 
+
+2. 개발 환경
+    1) IDE (Integrated Development Environment)
+        - 프로그래밍을 위한 통합 개발 환경
+            - 컴파일 
+            - 빌드
+            - 디버깅 
+            - 배포 
+    2) Visual Studio 
+        - MS 
+        - MSVC++
+    3) Clion
+        - Jetbrains
+
+3. C++란?
+    1) C++는 C언어를 포함함 
+    2) C++은 다중 패러다임을 지닌 언어임.
+        - Structural Programming (C언어)
+        - Object Oriented Programming (C++, Java, C#, Python)
+        - Generic Programming (template)
+
+4. cin, cout 객체 이용
+    1) C++의 확장자는 *.cpp임.
+    2) cin, cout 객체를 이용한 표준 입/출력을 제공함 
+        - 타입에 관계없이 자체적으로 입출력이 가능함 
+    3) endl
+        - 다음 줄로 이동하라는 의미
+        - '\n'의 기능을 수행
+        - 출력 버퍼 자동 비움 기능이 포함 
+    4) 문자의 아스키 코드 값을 출력하는 경우는 int형으로 형변환 함
+       정수를 문자로 출력하기 위해서는 char 형으로 형변환 함 
+
+5. 네임스페이스 
+    1) std 
+        - C++ 표준 라이브러리 기본 네임스페이스 
+            - 입출력
+                - 스트림 객체
+                    - cin : 표준 입력
+                    - cout : 표준 출력
+                    - cerr : 오류 출력               
+                - 파일 스트림 
+                    - ifstream : 파일 입력
+                    - ofstream : 파일 출력 
+                    - stringstream : 문자열 스트림                     
+
+            - 컨테이너 
+            - 알고리즘 
+            - 문자열 
+            - 유틸리티 
+            - 병렬처리 
+
+
+
+
+
