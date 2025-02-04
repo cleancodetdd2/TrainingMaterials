@@ -1,0 +1,70 @@
+1. 함수 중복 (Function Overloading)
+    1) C언어는 함수명을 가지고 함수를 호출함
+        - 같은 이름의 함수 사용 불가능
+    2) C++은 함수명과 매개변수의 정보를 함께 가지고 호출함 
+        - 같은 이름의 함수 사용이 가능 
+        - 함수 이름은 같지만, 매개변수의 타입(자료형)이나 개수가 다르면
+          함수 오버로딩이라고 함.
+        - 함수 오버로딩은 다형성(polymorphism)이 구현됨
+    3) 예)
+        - int sum(int a, int b)
+          {
+                return a + b;
+          }      
+
+        - double sum(double a, double b)
+          {
+                return a + b;
+          }                 
+
+        - int sum(int a)
+          {
+                return a;
+          }           
+
+        - double sum(int a, int b)              <-----잘못된 오버로딩 
+          {                                         (리턴타입만 다른 함수)
+                return a + b;
+          }            
+
+2. 디폴트 매개 변수 (default parameter)
+    1) 매개변수에 기본 값이 있는 함수
+    2) 함수 호출 시 전달되는 값이 있으면 전달된 값으로 대체되고,
+       전달된 값이 없으면 자신의 디폴트 값을 취하는 함수 
+    3) 기본값은 오른쪽에서부터 차례대로 할당 할수 있음
+    4) 함수의 선언과 정의를 따로 할 경우 선언부에만 대입함                  
+    5) 다형성(polymorphism)이 구현됨
+    6) 예)
+        - int megait(int a=10)
+         {
+            cout << a << endl;
+         }
+
+          int main()
+          {
+            megait();
+            megait(7);    
+          }  
+
+        - int sum(int a, int b=0, int c=0, int d=0, int e=0)
+          {
+            return a+b+c+d+e;
+          }          
+
+          int main()
+          {
+                cout << sum(1) << endl;
+                cout << sum(1,2) << endl;
+                cout << sum(1,2,3) << endl;
+                cout << sum(1,2,3,4) << endl;
+                cout << sum(1,2,3,4,5) << endl;
+          }  
+
+3. namespace 
+    1) 대형 프로젝트 내에서 이름 충돌을 막기 위한 도구 
+
+4. 레퍼런스 
+    1) 변수에 여러 개의 이름을 부여 할 수 있음.
+        - 서로 다른 이름으로 같은 변수에 접근 가능 
+    2) 레퍼런스 선언 시 & 연산자를 사용함 
+    3) 선언과 동시에 초기화되어야 함                   
