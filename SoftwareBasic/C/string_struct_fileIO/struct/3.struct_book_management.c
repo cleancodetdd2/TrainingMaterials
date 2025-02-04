@@ -24,18 +24,53 @@ typedef struct {
 //도서 정보 입력 함수
 void addBookInfo(Book* book) 
 {
-	
+	printf("도서명: ");
+	fgets(book->title, sizeof(book->title), stdin); //표준입력에서 도서명 읽음
+
+	printf("저자명: ");
+	fgets(book->author, sizeof(book->author), stdin);  //표준입력에서 저자명 읽음
+
+	printf("가격: ");
+	if (scanf("%d", &book->price) != 1) {	//가격을 입력 받음
+		printf("가격 입력 오류\n");
+		return ;
+	}
+
+	printf("수량: ");
+	if (scanf("%d", &book->quantity) != 1) {	//수량을 입력 받음
+		printf("수량 입력 오류\n");
+		return;
+	}
+	getchar();  // 입력 버퍼 비우기 
+
+	//매출액 계산 (가격*수량)
+	book->revenue = book->price * book->quantity;
 }
 
 //도서 정보 출력 함수
 void printBookInfo(Book book)
 {
-
+	printf("\n도서명: %s\n", book.title);
+	printf("저자: %s\n", book.author);
+	printf("가격: %d\n", book.price);
+	printf("수량: %d\n", book.quantity);
+	printf("매출액: %d\n", book.revenue);
 }
 
 int main()
 {
 	Book books[BOOK_CNT];	//도서 정보 저장할 배열 
+
+	printf("===도서 정보 입력===");
+	for (int i = 0; i < BOOK_CNT; i++) {
+		printf("\n[%d번째 도서]\n", i + 1);
+		addBookInfo(&books[i]);
+	}
+
+	printf("===도서 정보 출력력===");
+	for (int i = 0; i < BOOK_CNT; i++) {
+		printBookInfo(books[i]);
+	}
 
 	return 0;
 }
