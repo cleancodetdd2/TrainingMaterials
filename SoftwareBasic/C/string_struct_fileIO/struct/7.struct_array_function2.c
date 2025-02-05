@@ -30,6 +30,7 @@ void displayBook(BOOK* pBk, int bookCnt);
 void searchBook(BOOK* pBk, int bookCnt);
 void modifyBook(BOOK* pBk, int bookCnt);
 void preRegistMsg();
+void modifyMenu(BOOK* pBk, int index);
 
 int main()
 {
@@ -181,11 +182,16 @@ void modifyBook(BOOK* pBk, int bookCnt)
 
 	for (i = 0; i < bookCnt; i++)
 	{
-		if (strcmp(modifyBook, pBk[i].title) == 0)
+		if (strcmp(modifyTitle, pBk[i].title) == 0)
 		{
 			//배열에서 몇번째 것을 수정할 건지 index 활용
-			//modifyMenu()
+			modifyMenu(pBk, i);	// 도서정보 수정 함수
+			flag = 1;
 		}
+
+		if (flag == 0)
+			printf("\n\n\t\t검색 도서명이 존재하지 않으므로 수정할 수 없습니다.");
+
 	}
 
 }
@@ -194,4 +200,59 @@ void preRegistMsg()
 {
 	printf("\n\n\t\t도서 정보 등록 전입니다.\n");
 	printf("\t\t도서 정보 등록 후 다시 이용해 주세요.");
+}
+
+void modifyMenu(BOOK* pBk, int index)
+{
+	int select;
+	printf("\n\n\t===수정할 메뉴 선택===\n\n");
+	printf("1.도서명  2.작가  3. 가격 4. 수량  5. 전체  0. 이전 메뉴\n ");
+	printf("메뉴 선택 : [ ]\b\b");
+	if (scanf("%d", &select) != 1) {
+		printf("입력 오류입니다.\n");
+		return 1;
+	}
+	while (getchar() != '\n');
+
+	if (select == 0)
+	{
+		return;		// 호출한 곳으로 제어권 넘김
+	}
+
+	if (select == 5 || select == 1)
+	{
+		printf("\n변경할 도서명을 입력하세요 : ");
+		gets_s(pBk[index].title, TITLE_LEN);
+	}
+
+	if (select == 5 || select == 2)
+	{
+		printf("\n변경할 작가명을 입력하세요 : ");
+		gets_s(pBk[index].author, AUTHOR_LEN);
+	}
+
+	if (select == 5 || select == 3)
+	{
+		printf("\n변경할 가격을 입력하세요 : ");
+		if (scanf("%d", &pBk[index].price) != 1) {
+			printf("입력 오류입니다.\n");
+			return 1;
+		}
+		while (getchar() != '\n');
+
+		pBk[index].sale = pBk[index].price * pBk[index].cnt; //가격변경시 매출액 재계산
+	}
+
+	if (select == 5 || select == 4)
+	{
+		printf("\n변경할 수량을 입력하세요 : ");
+		if (scanf("%d", &pBk[index].cnt) != 1) {
+			printf("입력 오류입니다.\n");
+			return 1;
+		}
+		while (getchar() != '\n');
+
+		pBk[index].sale = pBk[index].price * pBk[index].cnt; //수량변경시 매출액 재계산
+	}
+		
 }
