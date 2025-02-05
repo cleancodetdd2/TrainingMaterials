@@ -64,9 +64,13 @@ int main()
 			break;
 		case 2:
 			if (flag == 1)
+			{
 				displayBook(book, BOOK_CNT);
+			}
 			else
+			{
 				preRegistMsg();
+			}	
 			break;
 		case 3:
 			if (flag == 1)
@@ -83,7 +87,8 @@ int main()
 		case 5:
 			exit(0);		// 프로그램 강제 종료 
 		}
-		
+		printf("\n\t\t");
+		system("pause");	//switch문 벗어난 후 일시 정지
 	}
 
 	return 0;
@@ -127,20 +132,66 @@ void registBook(BOOK* pBk, int bookCnt)
 
 void displayBook(BOOK* pBk, int bookCnt)
 {
+	int i;
+	system("cls");
+	printf("\n\n\t\t\t ==== 도서 정보 출력 === \n\n");
+	printf("%4s %-25s %-20s %5s %4s %7s\n", "번호", "도서명", "작가", "가격", "수량", "매출액");
+
+	for (i = 0; i < bookCnt; i++)
+		printf("%03d %-25s %-20s %5d %4d %7d\n",
+			i + 1, pBk[i].title, pBk[i].author, pBk[i].price, pBk[i].cnt, pBk[i].sale);
 
 }
 
 void searchBook(BOOK* pBk, int bookCnt)
 {
+	char searchTitle[TITLE_LEN];
+	int i;
+	int flag = 0;		// 검색 여부 판별
 
+	system("cls");
+	printf("\n\n 검색할 도서명을 입력하세요 : ");
+	gets_s(searchTitle, TITLE_LEN);
+
+	printf("\n\n\t\t\t ==== 검색된 도서 정보 출력 === \n\n");
+	printf("%4s %-25s %-20s %5s %4s %7s\n", "번호", "도서명", "작가", "가격", "수량", "매출액");
+	for (i = 0; i < bookCnt; i++)
+	{
+		//검색도서명 == 저장도서명 (str1 == str2 두문자열 같음)
+		if (strcmp(searchTitle, pBk[i].title) == 0)
+		{
+			printf("%03d %-25s %-20s %5d %4d %7d\n",
+				i + 1, pBk[i].title, pBk[i].author, pBk[i].price, pBk[i].cnt, pBk[i].sale);
+			flag = 1; // 검색이 되었다면 1로 변환
+		}
+	}
+	if (flag == 0)
+		printf("\n\n\t\t 검색 도서는 존재하지 않습니다.\n");
 }
 
 void modifyBook(BOOK* pBk, int bookCnt)
 {
+	char modifyTitle[TITLE_LEN];
+	int i;
+	int flag = 0;		// 검색 여부 판별
+	
+	system("cls");
+	printf("\n\n 수정할 도서명을 입력하세요 : ");
+	gets_s(modifyTitle, TITLE_LEN);
+
+	for (i = 0; i < bookCnt; i++)
+	{
+		if (strcmp(modifyBook, pBk[i].title) == 0)
+		{
+			//배열에서 몇번째 것을 수정할 건지 index 활용
+			//modifyMenu()
+		}
+	}
 
 }
 
 void preRegistMsg()
 {
-
+	printf("\n\n\t\t도서 정보 등록 전입니다.\n");
+	printf("\t\t도서 정보 등록 후 다시 이용해 주세요.");
 }
