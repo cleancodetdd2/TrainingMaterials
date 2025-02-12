@@ -52,3 +52,64 @@ void traverseList() {
 	}
 	printf("NULL\n");
 }
+
+/*
+	새로운 노드를 리스트의 맨 뒤에 추가
+*/
+void insertRear(int data) {
+	Node* newNode = (Node*)malloc(sizeof(Node));	// 새 노드 동적 할당
+	if (!newNode) return;		// 메모리 할당 실패 시 종료
+
+	newNode->value = data;	// 노드에 데이터 저장
+	newNode->next = NULL;	// 새 노드는 마지막으므로 다음 노드는 없음
+
+	if (!head) {	// 리스트가 비어있는 경우
+		head = newNode;		// 새 노드를 head로 설정
+		return;
+	}
+
+	Node* cur = head;
+	while (cur->next) {	// 마지막 노드로 이동
+		cur = cur->next;
+	}
+	cur->next = newNode;	// 마지막 노드의 next를 새 노드로 연결
+}
+
+/*
+	1부터 시작하는 위치(pos)를 입력받아 해당 위치에 새 노드를 삽입
+*/
+void insertAt(int data, int pos) {
+	if (pos < 1) return;	// 위치가 1보다 작으면 삽입 불가
+
+	Node* newNode = (Node*)malloc(sizeof(Node));	// 새 노드 동적 할당
+	if (!newNode) return;		// 메모리 할당 실패 시 종료
+
+	newNode->value = data;	// 노드에 데이터 저장
+	newNode->next = NULL;	// 새 노드는 마지막으므로 다음 노드는 없음
+
+	if (pos == 1) {	// 첫 번째 위치에 삽입하는 경우
+		newNode->next = head;	// 새 노드의 다음을 기존 head로 설정
+		head = newNode;			// head를 새 노드로 변경
+		return;
+	}
+
+	Node* cur = head;
+	for (int i = 1; cur != NULL && i < pos - 1; i++)	// 삽입 위치 이전까지 이동 
+		cur = cur->next;
+
+	if (!cur) {		// 잘못된 위치인 경우(리스트 크기 초과)
+		free(newNode);	// 메모리 누수 방지
+		return;
+	}
+
+	newNode->next = cur->next;	// 새 노드의 다음을 기존 노드로 연결
+	cur->next = newNode;	// 이전 노드의 다음을 새 노드로 연결
+}
+
+/*
+	리스트 첫 번째 노드를 삭제하고, 다음 노드를 새로운 head로 설정
+	삭제 성공 시 1, 실패 시 0 반환 
+*/
+int removeFront() {
+
+}

@@ -18,7 +18,7 @@ void insertRear(int data);			// 뒤에 노드 삽임
 void insertAt(int data, int pos);	// 특정 위치에 노드 삽임
 void traverseList();				// 리스트 출력 
 
-void removeFront();					// 첫번째 노드 삭제 
+int removeFront();					// 첫번째 노드 삭제 
 void removeRear();					// 마지막 노드 삭제 
 void removeAt(int pos);				// 특정 위치의 노드 삭제
 void removeByValue(int value);		// 특정 값의 노드 삭제 
