@@ -111,5 +111,55 @@ void insertAt(int data, int pos) {
 	삭제 성공 시 1, 실패 시 0 반환 
 */
 int removeFront() {
+	if (!head) return 0;		// 리스트가 비어 있으면 삭제 불가
 
+	Node* temp = head;
+	head = head->next;		// head를 다음 노드로 이동
+	free(temp);		// 기존 첫 번째 노드 삭제
+	return 1;
+}
+
+/*
+	리스트의 마지막 노드를 찾아 삭제
+	삭제 성공 시 1, 실패 시 0 반환
+*/
+int removeRear() {
+	if (!head) return 0;		// 리스트가 비어 있으면 삭제 불가
+
+	if (!head->next) {		// 리스트에 노드가 하나만 있는 경우
+		free(head);
+		head = NULL;
+		return 1;
+	}
+
+	Node* cur = head;
+	// 현재 노드(cur)의 다음 노드(cur->next)가 마지막 노드가 아닐 때까지 이동
+	while (cur->next->next) {	// 마지막 노드 이전까지 이동 
+		cur = cur->next;
+	}
+
+	free(cur->next);		// 마지막 노드 삭제
+	cur->next = NULL;		// 새로운 마지막 노드 설정
+	return 1;
+}
+
+/*
+	1부터 시작하는 위치(pos)를 입력받아 해당 위치의 노드를 삭제함
+	삭제 성공 시 1, 실패 시 0 반환
+*/
+int removeAt(int pos) {
+	if (!head || pos < 0) return 0;		// 리스트가 비어 있거나 잘못된 위치인 경우
+
+	if (pos == 1) return removeFront();		// 첫 번째 노드 삭제 처리 
+
+	Node* cur = head;
+	for (int i = 1; cur != NULL && i < pos - 1; i++)  // 삭제할 위치 이전까지 이동
+		cur = cur->next;
+
+	if (!cur || !cur->next) return 0;	// 삭제할 노드가 없는 경우
+
+	Node* temp = cur->next;		// 삭제할 노드 저장
+	cur->next = temp->next;		// 이전 노드가 다음 노드를 가리키게 연결 변경
+	free(temp);		// 삭제된 노드의 메모리 해제
+	return 1;
 }

@@ -44,6 +44,7 @@ int main() {
 			insertFront(data);
 			printf("노드가 리스트 맨앞에 삽입되었습니다.\n");
 			break;
+
 		case 2:	// 리스트 맨뒤에 삽입
 			printf("삽입할 값 입력: ");
 			if (scanf("%d", &data) != 1) {
@@ -55,6 +56,7 @@ int main() {
 			insertRear(data);
 			printf("노드가 리스트 뒤에 삽입되었습니다.\n");
 			break;
+
 		case 3:
 			printf("삽입할 값 입력: ");
 			if (scanf("%d", &data) != 1) {
@@ -75,11 +77,48 @@ int main() {
 			printf("노드가 %d번째 위치에 삽입되었습니다.\n", pos);
 			break;
 
-		case 4:
+		case 4:		// 첫 번째 노드 삭제
 			if (removeFront())
 				printf("첫 번째 노드가 삭제되었습니다.\n");
 			else
 				printf("삭제할 노드가 없습니다.\n");
+			break;
+
+		case 5:		// 마지막 노드 삭제
+			if (removeRear())
+				printf("마지막 노드가 삭제되었습니다.\n");
+			else 
+				printf("삭제할 노드가 없습니다.\n");
+			break;
+
+		case 6:		// 특정 위치의 노드 삭제
+			printf("삭제할 위치 입력 (1부터 시작): ");
+			if (scanf("%d", &pos) != 1) {
+				printf("잘못된 입력입니다. 숫자를 입력하세요.\n");
+				clearBuffer();
+				break;
+			}
+			//clearBuffer();
+
+			if (removeAt(pos))
+				printf("%d번째 위치의 노드가 삭제되었습니다.\n", pos);
+			else
+				printf("삭제할 노드가 없거나 잘못된 위치입니다.\n");
+			break;
+
+		case 7:		// 특정 값을 가진 노드 삭제
+			printf("삭제할 값 입력 : ");
+			if (scanf("%d", &data) != 1) {
+				printf("잘못된 입력입니다. 숫자를 입력하세요.\n");
+				clearBuffer();
+				break;
+			}
+			//clearBuffer();
+
+			if (removeByValue(data))
+				printf("%d 값을 가진 노드가 삭제되었습니다.\n", data);
+			else
+				printf("해당 값을 가진 노드가 없습니다.\n");
 			break;
 
 		case 8:		// 리스트 출력
