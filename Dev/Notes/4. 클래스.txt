@@ -20,7 +20,7 @@
 
     4) 다형성(Polymorphism)
         - 하나의 기능이 경우에 따라 다르게 보이거나 다르게 작동하는 현상 
-        - 함수 다중정의(Overloading), 함수 재정의(Overriding), 연산자 중복정의        
+        - 함수 다중정의(Overloading), 함수 재정의(Overriding),연산자 중복정의        
 
 3. 클래스와 객체
     1) 세상 모든 것이 객체임
