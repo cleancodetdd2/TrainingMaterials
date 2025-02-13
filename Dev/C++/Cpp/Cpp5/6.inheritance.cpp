@@ -5,14 +5,19 @@ using std::cin; using std::cout; using std::endl; using std::string;
 
 class Person {
 private:
-	string name;
+	string name;	
 public:
 	Person(string name) : name(name) {}
 	string getName() { return this->name; }
 	void showName() { cout << "이름 : " << getName() << "\n"; }
 };
 
-class Student : Person {
+class Temp {
+public:
+	void showTemp() { cout << "임시 부모 클래스입니다.\n"; }
+};
+
+class Student : Person, public Temp {
 private:
 	int studentID;
 public:
@@ -28,6 +33,7 @@ public:
 int main() {
 	Student student1(1, "이순신");
 	student1.show();
+	student1.showTemp();
 
 	return 0;
 }
