@@ -31,8 +31,21 @@ void selection_sort(int* arr, int size) {
 		min = i;	// 현재 정렬 위치를 최솟값으로 지정
 		int initial_min_value = arr[min];	// 초기 최소값 저장 (현재 i 위치의 값)
 
-		//
+		for (j = i + 1; j < size; j++) {	// 현재 i 이후의 값들과 비교하여 최솟값 찾기
+			if (arr[min] > arr[j])			// 현재 최솟값보다 작은 값 발견시 최솟값 인덱스 변경
+				min = j;
+		}
+		int final_min_value = arr[min];		// 최종적으로 찾은 최솟값 저장 
+		int swap_happend = (i != min);	// 현재 i 위치의 값과 최솟값의 위치가 다름 => 교환필요
+		
+		if (swap_happend)	// 최소값이 현재 위치의 값과 다를 경우
+			swap(int, arr[i], arr[min]);	// i위치의 값과 최솟값 교환 
 
+		//정렬 과정 출력
+		printf("  %3d  |  %3d  |    %10d  |    %10d  |  %7s  | ",
+			i + 1, i, initial_min_value, final_min_value, swap_happend ? "Yes" : "No");
+		print_array_spaced(arr, size);		//현재 정렬된 상태 출력
+		printf("\n");
 	}
 
 }
@@ -77,5 +90,12 @@ int main()
 	//선택 정렬 실행
 	selection_sort(arr, size);
 
+	//정렬 후 배열 출력
+	printf("\n\n--- 정렬 후 자료 출력 ---\n");
+	print_array_spaced(arr, size);
+	printf("\n\n");
+
+	// 동적 메모리 해제
+	free(arr);		// 할당된 메모리 반환
 	return 0;
 }
