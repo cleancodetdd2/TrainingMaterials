@@ -17,6 +17,8 @@ typedef struct graph {
 
 void grapInit(graph* pGrp, int count);		//그래프 초기화 
 void display(graph* pGrp);					//간선 정보 출력 (그래프 출력)
+void addUnDirectedEdge(graph* pGrp, int src, int dst, int cost);  //무방향 그래프 간선 저장(양방향)
+void addDirectedEdge(graph* pGrp, int src, int dst, int cost);	//방향 그래프 간선 저장(단방향)
 
 int main()
 {
@@ -24,6 +26,12 @@ int main()
 
 	//그래프 초기화 (정점 개수 4개)
 	grapInit(&grp, 4);
+
+	//간선 추가 (무방향 그래프)
+	addUnDirectedEdge(&grp, 0, 1, 1);		//그래프, 출발지, 도착지, 가중치
+	addUnDirectedEdge(&grp, 0, 2, 1);
+	addUnDirectedEdge(&grp, 1, 2, 1);
+	addUnDirectedEdge(&grp, 2, 3, 1);
 
 	//간선 정보 출력 (그래프 출력)
 	display(&grp);
@@ -62,4 +70,28 @@ void display(graph* pGrp)
 		}
 		printf("\n");
 	}
+}
+
+//무방향 그래프(양방향 즉 뱡향그래프가 2개)
+void addUnDirectedEdge(graph* pGrp, int src, int dst, int cost)
+{
+	addDirectedEdge(pGrp, src, dst, cost);		//단방향 추가
+	addDirectedEdge(pGrp, dst, src, cost);		//반대 방향 추가
+}
+
+void addDirectedEdge(graph* pGrp, int src, int dst, int cost)
+{
+	node* newNode = (node*)malloc(sizeof(node));	//새로운 노드 동적 메모리 할당
+	newNode->vertex = dst;		// 도착지 저장 (목적지 정점)
+	newNode->cost = cost;		// 가중치 저장 
+	newNode->next = NULL;		// 다음 노드의 주소 NULL로 초기화
+
+	if (pGrp->head[src].next == NULL)	// 출발지의 next가 NULL이면(연결된 노드가 없으면)
+	{
+		pGrp->head[src].next = newNode;	// 출발지의 next에 새로운 노드의 주소 저장
+		return;		// 연결이 되었으니 종료
+	}
+
+	newNode->next = pGrp->head[src].next;	// 새로운 노드의 next에 출발지의 next 주소 저장 (기존 노드와 연결)
+	pGrp->head[src].next = newNode;	 // 출발지의 next에 새로운 노드의 주소 저장
 }
