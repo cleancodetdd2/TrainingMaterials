@@ -19,6 +19,7 @@ void grapInit(graph* pGrp, int count);		//그래프 초기화
 void display(graph* pGrp);					//간선 정보 출력 (그래프 출력)
 void addUnDirectedEdge(graph* pGrp, int src, int dst, int cost);  //무방향 그래프 간선 저장(양방향)
 void addDirectedEdge(graph* pGrp, int src, int dst, int cost);	//방향 그래프 간선 저장(단방향)
+void memoryFree(graph* pGrp);		// 메모리 해제
 
 int main()
 {
@@ -35,6 +36,9 @@ int main()
 
 	//간선 정보 출력 (그래프 출력)
 	display(&grp);
+
+	//메모리 해제
+	memoryFree(&grp);
 
 	return 0;
 }
@@ -94,4 +98,23 @@ void addDirectedEdge(graph* pGrp, int src, int dst, int cost)
 
 	newNode->next = pGrp->head[src].next;	// 새로운 노드의 next에 출발지의 next 주소 저장 (기존 노드와 연결)
 	pGrp->head[src].next = newNode;	 // 출발지의 next에 새로운 노드의 주소 저장
+}
+
+void memoryFree(graph* pGrp) {
+	int i;
+	node* delNode;
+
+	for (i = 0; i < pGrp->vertexCount; i++)
+	{
+		while (pGrp->head[i].next != NULL)	// 출발지의 next가 NULL이 아니면
+		{
+			delNode = pGrp->head[i].next;	// 삭제할 노드를 가리키는 포인터 
+			pGrp->head[i].next = delNode->next;	// 현재 노드의 next를 삭제할 노드의 next로 변경
+			printf("도착지 %d노드 제거\n", delNode->vertex);	//삭제할 노드의 정보 출력
+			free(delNode);		// 노드 제거 (메모리 해제)
+		}
+
+		printf("출발지 배열 제거\n");
+		free(pGrp->head);		// 출발지 배열 제거 
+	}
 }
